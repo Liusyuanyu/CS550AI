@@ -53,7 +53,7 @@ class BreadthFirst:
             # print('Cost:  ', parentnode.get_g+1)
             return parentnode.get_g()+1
         else:
-            return 1
+            return 0
     
     @classmethod
     def h(cls, state):
@@ -64,8 +64,13 @@ class DepthFirst:
     "DepthFirst - depth first search"
     @classmethod
     def g(cls, parentnode, action, childnode): #To be h() 
+        max_depth = 20
         if parentnode:
-            return -childnode.depth
+            if childnode.depth > max_depth:
+                return 0
+                # return -childnode.depth+1
+            else:
+                return -childnode.depth
         else:
             return 0
         # return appropritate g value
@@ -79,9 +84,8 @@ class Manhattan:
     "Manhattan Block Distance heuristic"
     @classmethod
     def g(cls, parentnode, action, childnode):
-        #Because moving a tile costs 1 
         if parentnode:
-            return 1
+            return parentnode.get_g()+1
         else:
             return 0
         # return appropritate g value

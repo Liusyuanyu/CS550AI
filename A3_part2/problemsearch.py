@@ -80,6 +80,7 @@ def graph_search(problem, verbose=False, debug=False):
         #Insert all new nodes into queues and explored
         for newNode in newNodes:
             if( not explore.exists(newNode.state)):
+                # print('F: ', newNode.get_f(), '  G: ', newNode.get_g(), '   H: ', newNode.get_h())
                 explore.add(newNode.state)
                 node_queue.append(newNode)
                 node_num +=1
@@ -88,6 +89,7 @@ def graph_search(problem, verbose=False, debug=False):
                     solved = newNode.state.solved()
         if not solved:
             node = node_queue.pop()
-            board =newNode.state 
-    return node.path() , node_num
+            board =newNode.state
+    # return node.path() , node_num, solved
+    return node, node_num
 #     raise NotImplemented
