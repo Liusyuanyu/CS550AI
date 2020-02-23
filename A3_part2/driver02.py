@@ -38,7 +38,36 @@ class Timer:
     
 def driver() :
 
-    raise NotImplemented
+    numOfBoard = 10
+
+    # dfs_nodes = []
+    # dfs_elapsed = []
+    # dfs_length = []
+
+    bfs_nodes = []
+    bfs_elapsed = []
+    bfs_length = []
+
+    # astar_nodes = []
+    # astar_elapsed = []
+    # astar_length = []
+
+    for _ in range(numOfBoard):
+        puzzle = NPuzzle(8,g=BreadthFirst.g, h = BreadthFirst.h)
+        result = graph_search(puzzle)
+        bfs_length.append(len(result[0]))
+        bfs_nodes.append(result[1])
+        bfs_elapsed.append(result[2])
+
+    print('Length of plan')
+    print('Mean: ',  '{:10}'.format(mean(bfs_length))  ,   ' STD: ', '{:10}'.format(stdev(bfs_length)))
+    print('Number of nodes')
+    print('Mean: ',  '{:10}'.format(mean(bfs_nodes))  ,   ' STD: ', '{:10}'.format(stdev(bfs_nodes)))
+    print('Elapsed time in second')
+    print('Mean: ',  '{:10}'.format(mean(bfs_elapsed))  ,   ' STD: ', '{:10}'.format(stdev(bfs_elapsed)))
+
+    
+    # raise NotImplemented
 
 if __name__ == '__main__':
     driver()

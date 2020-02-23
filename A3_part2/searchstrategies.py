@@ -64,7 +64,8 @@ class DepthFirst:
     "DepthFirst - depth first search"
     @classmethod
     def g(cls, parentnode, action, childnode): #To be h() 
-        max_depth = 20
+        # max_depth = 20
+        max_depth = 4
         if parentnode:
             if childnode.depth > max_depth:
                 return 0

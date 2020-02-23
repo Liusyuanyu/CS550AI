@@ -26,13 +26,8 @@ class NPuzzle(Problem):
         #    e.g. foobar(arg1, arg2, …, argn, **kwargs).
 
         # initialize parent
-        # def __init__(self, initial, goals=None, 
-        #          g = lambda oldnode, action, newnode : oldnode.depth+1, 
-        #          h = lambda newnode : 0):
         nBoard = TileBoard(n, force_state=force_state)
         super().__init__(initial= nBoard, goals = nBoard.goals, g=kwargs['g'], h=kwargs['h'])
-        # self.nBoard = TileBoard(n, force_state=force_state)
-        # super().__init__(initial= self.nBoard.state_tuple(),goals = self.nBoard.goals, g=kwargs['g'], h=kwargs['h'])
 
         # raise NotImplemented
 
@@ -40,24 +35,12 @@ class NPuzzle(Problem):
         "actions(state) - find a set of actions applicable to specified state"
         return super().actions(state)
         
-        # nboard = TileBoard(self.nBoard.boardsize, force_state=state)
-        # return nboard.get_actions()
         # raise NotImplemented
     
     def result(self, state, action):
         "result(state, action)- apply action to state and return new state"
-        
-        # [delta_r, delta_c] = action
-        # pos = action.index(None)
-        # rprime, cprime = pos//self.nBoard.boardsize+delta_r , pos %self.nBoard.boardsize + delta_c
-        # newPos = rprime*self.nBoard.boardsize +  cprime
-        # newState = list(state)
-        # newState[pos], newPos[newPos] = newState[newPos], newPos[pos] 
-        # return newState
         return state.move(action)
 
-        # nboard = TileBoard(self.tileNum, force_state=state)
-        # return nboard.move(action).state_tuple
         # raise NotImplemented
     
     def goal_test(self, state):

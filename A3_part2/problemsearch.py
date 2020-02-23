@@ -5,7 +5,9 @@ problemsearch - Functions for seaarching.
 from basicsearch_lib02.searchrep import (Node, print_nodes)
 from basicsearch_lib02.queues import PriorityQueue 
 from explored import Explored
-        
+
+import time
+
 def graph_search(problem, verbose=False, debug=False):
     """graph_search(problem, verbose, debug) - Given a problem representation
     (instance of basicsearch_lib02.representation.Problem or derived class),
@@ -67,6 +69,8 @@ def graph_search(problem, verbose=False, debug=False):
     path - list of actions to solve the problem or None if no solution was found
     nodes_explored - Number of nodes explored (dequeued from frontier)
     """
+    start = time.time()
+
     initial_node = Node(problem, problem.initial)
     node_queue = PriorityQueue(f=lambda x: x.get_f())
     explore = Explored()
@@ -80,16 +84,21 @@ def graph_search(problem, verbose=False, debug=False):
         #Insert all new nodes into queues and explored
         for newNode in newNodes:
             if( not explore.exists(newNode.state)):
-                # print('F: ', newNode.get_f(), '  G: ', newNode.get_g(), '   H: ', newNode.get_h())
                 explore.add(newNode.state)
                 node_queue.append(newNode)
                 node_num +=1
                 if newNode.state.solved():
                     node = newNode
                     solved = newNode.state.solved()
+        if len(node_queue)==0:
+            break
+            
         if not solved:
             node = node_queue.pop()
             board =newNode.state
-    # return node.path() , node_num, solved
-    return node, node_num
+    
+
+    second = (time.time() - start)
+    actions = [a_node.action for a_node in node.path() if a_node.action]
+    return (actions, node_num, second)
 #     raise NotImplemented
